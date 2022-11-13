@@ -115,9 +115,8 @@ public class Login extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please enter a valid username");
             else if(rs.next() ){
                 dispose();
-                Home homepage = new Home();
+                Home homepage = new Home(username);
                 homepage.show();
-                homepage.setUsername(username);
                 JOptionPane.showMessageDialog(this, "Login Successful!");
     
             }

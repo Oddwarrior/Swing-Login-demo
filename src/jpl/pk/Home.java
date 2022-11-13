@@ -1,22 +1,53 @@
 package jpl.pk;
 
 import javax.swing.*;
+import java.sql.*;
 
 
 public class Home extends javax.swing.JFrame {
     
-    private String username;
+    private  static String username;
   
-    public Home() {
+    public Home(String username) {
+        this.username = username;
         initComponents();
-        loadHome();
+        getUserDataFromDatabase();
+ 
     }
-
-  
+    
+    
     @SuppressWarnings("unchecked")
+    
+    private  static void getUserDataFromDatabase(){
+         try{  
+            Class.forName("com.mysql.jdbc.Driver");  
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb","root","2000");  
+            //here mydb is database name, root is username and 2000 is password  
+            
+            
+            Statement stmt=con.createStatement(); 
+            String query = "SELECT * FROM userInfo WHERE username ='"+username+"'";
+            System.out.println("username is "+username);
+            ResultSet rs=stmt.executeQuery(query);
+            
+            if(rs.next()){
+            String email = rs.getString("email");
+            String mobile = rs.getString("mobile");
+            
+      
+            usernameLabel.setText(username);
+            emailLabel.setText(email);
+            mobileLabel.setText(mobile);
+            }
+            
+            con.close();
+    }
+    catch(Exception e){ System.out.println(e.getMessage());}
+    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         profileBtn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -27,14 +58,23 @@ public class Home extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         tabbedPane = new javax.swing.JTabbedPane();
         profilePane = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         logoutBtn = new javax.swing.JButton();
+        usernameLabel = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        jSeparator5 = new javax.swing.JSeparator();
+        mobileLabel = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+
+        jLabel7.setText("jLabel7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,36 +187,80 @@ public class Home extends javax.swing.JFrame {
 
         profilePane.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel4.setText("1");
-
-        logoutBtn.setBackground(new java.awt.Color(204, 153, 255));
+        logoutBtn.setBackground(new java.awt.Color(0, 0, 51));
         logoutBtn.setForeground(new java.awt.Color(255, 255, 255));
-        logoutBtn.setText("jButton1");
+        logoutBtn.setText("Logout");
+        logoutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutBtnActionPerformed(evt);
             }
         });
 
+        usernameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        usernameLabel.setText("Username");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setText("Email");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Mobile");
+
+        emailLabel.setText("email");
+
+        mobileLabel.setText("123242424");
+
         javax.swing.GroupLayout profilePaneLayout = new javax.swing.GroupLayout(profilePane);
         profilePane.setLayout(profilePaneLayout);
         profilePaneLayout.setHorizontalGroup(
             profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profilePaneLayout.createSequentialGroup()
-                .addGap(168, 168, 168)
                 .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(logoutBtn)
-                    .addComponent(jLabel4))
-                .addContainerGap(346, Short.MAX_VALUE))
+                    .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(profilePaneLayout.createSequentialGroup()
+                            .addGap(152, 152, 152)
+                            .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(logoutBtn)
+                                .addGroup(profilePaneLayout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(usernameLabel))))
+                        .addGroup(profilePaneLayout.createSequentialGroup()
+                            .addGap(71, 71, 71)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(profilePaneLayout.createSequentialGroup()
+                            .addGap(88, 88, 88)
+                            .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(jLabel4))))
+                    .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(emailLabel)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                        .addComponent(mobileLabel)
+                        .addComponent(jSeparator6)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         profilePaneLayout.setVerticalGroup(
             profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profilePaneLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel4)
-                .addGap(72, 72, 72)
+                .addGap(90, 90, 90)
+                .addComponent(usernameLabel)
+                .addGap(14, 14, 14)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(emailLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(profilePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(mobileLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addComponent(logoutBtn)
-                .addContainerGap(185, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         tabbedPane.addTab("tab1", profilePane);
@@ -193,7 +277,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(257, 257, 257)
                 .addComponent(jLabel3)
-                .addContainerGap(325, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +298,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(255, 255, 255)
                 .addComponent(jLabel2)
-                .addContainerGap(327, Short.MAX_VALUE))
+                .addContainerGap(168, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -235,7 +319,7 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(245, 245, 245)
                 .addComponent(jLabel1)
-                .addContainerGap(337, Short.MAX_VALUE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +331,7 @@ public class Home extends javax.swing.JFrame {
 
         tabbedPane.addTab("tab4", jPanel5);
 
-        getContentPane().add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, -44, -1, 450));
+        getContentPane().add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, -44, 430, 450));
 
         pack();
         setLocationRelativeTo(null);
@@ -256,6 +340,9 @@ public class Home extends javax.swing.JFrame {
     private void profileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileBtnActionPerformed
         // TODO add your handling code here:
         tabbedPane.setSelectedIndex(0);
+       
+
+       
     }//GEN-LAST:event_profileBtnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -310,18 +397,17 @@ public class Home extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Home().setVisible(true);
+                new Home("").setVisible(true);
+                
+                
    
             }
         });
     }
-    public  void setUsername(String username){
-        this.username = username;
-//        WelcomePara.setText("Welcome "+username);
-         
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private static javax.swing.JLabel emailLabel;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -329,6 +415,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -336,10 +424,15 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JButton logoutBtn;
+    private static javax.swing.JLabel mobileLabel;
     public javax.swing.JButton profileBtn;
     private javax.swing.JPanel profilePane;
     public javax.swing.JTabbedPane tabbedPane;
+    private static javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 
 }  
