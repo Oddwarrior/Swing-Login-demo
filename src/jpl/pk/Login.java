@@ -2,6 +2,7 @@
 package jpl.pk;
 
 
+import java.awt.Color;
 import javax.swing.*;
 import java.sql.*;
 
@@ -9,6 +10,17 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        UIManage();
+    }
+    public void UIManage(){
+//        try{
+//        UIManager UI = new UIManager();
+//         UIManager.setLookAndFeel("com.swing.plaf.windows.WindowsLookAndFeel");
+//        }
+//        catch(Exception e){
+//            System.out.println("UI exception");
+//        }
+//        UI.put("OptionPane.background", Color.white);
     }
 
     @SuppressWarnings("unchecked")
@@ -68,9 +80,7 @@ public class Login extends javax.swing.JFrame {
         loginBtn1.setText("Login");
         loginBtn1.setBorder(null);
         loginBtn1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        loginBtn1.setFocusPainted(false);
         loginBtn1.setFocusable(false);
-        loginBtn1.setOpaque(false);
         loginBtn1.setRequestFocusEnabled(false);
         loginBtn1.setRolloverEnabled(false);
         loginBtn1.addActionListener(new java.awt.event.ActionListener() {
@@ -134,10 +144,7 @@ public class Login extends javax.swing.JFrame {
     private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
         // TODO add your handling code here:
         Register newRegistration = new Register();
-        newRegistration.show();
-   
-        
-                
+        newRegistration.show();              
 
     }//GEN-LAST:event_registerBtnActionPerformed
 
@@ -146,7 +153,7 @@ public class Login extends javax.swing.JFrame {
  
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -165,6 +172,7 @@ public class Login extends javax.swing.JFrame {
             public void run() {
                 new Login().setVisible(true);
             }
+                        
         });
     }
 

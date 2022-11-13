@@ -90,7 +90,10 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jSeparator9" min="-2" pref="190" max="-2" attributes="0"/>
                               <Component id="addressTxt" min="-2" pref="195" max="-2" attributes="0"/>
-                              <Component id="registerBtn2" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                  <Component id="registerBtn2" min="-2" pref="84" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
